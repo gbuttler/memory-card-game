@@ -3,6 +3,7 @@ import "./App.css";
 import Title from "./components/Title";
 import Description from "./components/Description";
 import Scores from "./components/Scores";
+import Cards from "./components/Cards";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -12,6 +13,7 @@ function App() {
       <Title />
       <Description />
       <Scores />
+      <Cards />
     </>
   );
 }
