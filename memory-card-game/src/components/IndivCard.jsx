@@ -19,13 +19,16 @@ function IndivCard() {
 
   return (
     <>
-      <div className="disney-char-container">
-        <img
-          className="disney-char-image"
-          src={charData?.data?.imageUrl}
-          width={350}
-        ></img>
-        <p>{charData?.data?.name}</p>
+      <div className="flex flex-col w-50 h-70 justify-evenly items-center  bg-disney-blue m-5 rounded-lg  hover:bg-hover-disney-blue hover:cursor-pointer">
+        <div className="flex flex-col justify-center w-40 h-50">
+          <img
+            className="max-w-40 max-h-50"
+            src={charData?.data?.imageUrl}
+          ></img>
+        </div>
+        <div className="flex w-40 justify-center">
+          <p className="text-xl text-white">{charData?.data?.name}</p>
+        </div>
       </div>
     </>
   );

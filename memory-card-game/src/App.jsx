@@ -10,10 +10,18 @@ function App() {
 
   return (
     <>
-      <Title />
-      <Description />
-      <Scores />
-      <Cards />
+      <div className="flex flex-col m-7">
+        <div className="flex justify-between">
+          <div className="flex flex-col items-start">
+            <Title />
+            <Description />
+          </div>
+          <Scores />
+        </div>
+        <div className="flex justify-center">
+          <Cards />
+        </div>
+      </div>
     </>
   );
 }

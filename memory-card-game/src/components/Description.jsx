@@ -1,7 +1,10 @@
 function Description() {
   return (
     <>
-      <p>Game description</p>
+      <p>
+        Try to click on every single card once. But, be careful! The order will
+        change after every click!
+      </p>
     </>
   );
 }

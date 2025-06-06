@@ -1,10 +1,12 @@
 function Scores() {
   return (
     <>
-      <p>High Score:</p>
-      <p>Current Score:</p>
+      <div className="mr-5">
+        <p>High Score:</p>
+        <p>Current Score:</p>
+      </div>
     </>
   );
 }
 
-export default Scores
+export default Scores;
