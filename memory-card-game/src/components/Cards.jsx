@@ -8,6 +8,13 @@ function Cards() {
       <IndivCard />
       <IndivCard />
       <IndivCard />
+      <IndivCard />
+      <IndivCard />
+      <IndivCard />
+      <IndivCard />
+      <IndivCard />
+      <IndivCard />
+      <IndivCard />
     </>
   );
 }
