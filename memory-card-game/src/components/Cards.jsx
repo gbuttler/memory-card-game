@@ -7,6 +7,7 @@ function Cards({ score, setScore }) {
   }
 
   function onBadClick() {
+    setScore(0);
     alert("Oops, bad click, Game over!");
   }
   const cards = Array.from({ length: 12 }, () => (
