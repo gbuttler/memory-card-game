@@ -1,5 +1,6 @@
 // import { useState } from 'react'
 import "./App.css";
+import { useState } from "react";
 import Title from "./components/Title";
 import Description from "./components/Description";
 import Scores from "./components/Scores";
@@ -7,6 +8,7 @@ import Cards from "./components/Cards";
 
 function App() {
   // const [count, setCount] = useState(0)
+  const [score, setScore] = useState(0);
 
   return (
     <>
@@ -16,10 +18,10 @@ function App() {
             <Title />
             <Description />
           </div>
-          <Scores />
+          <Scores score={score} />
         </div>
         <div className="flex justify-center">
-          <Cards />
+          <Cards score={score} setScore={setScore} />
         </div>
       </div>
     </>
