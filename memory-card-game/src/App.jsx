@@ -9,6 +9,7 @@ import Cards from "./components/Cards";
 function App() {
   // const [count, setCount] = useState(0)
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   return (
     <>
@@ -18,10 +19,15 @@ function App() {
             <Title />
             <Description />
           </div>
-          <Scores score={score} />
+          <Scores score={score} highScore={highScore} />
         </div>
         <div className="flex justify-center">
-          <Cards score={score} setScore={setScore} />
+          <Cards
+            score={score}
+            setScore={setScore}
+            highScore={highScore}
+            setHighScore={setHighScore}
+          />
         </div>
       </div>
     </>

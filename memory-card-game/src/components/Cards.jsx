@@ -1,18 +1,41 @@
 import IndivCard from "./IndivCard";
 
-function Cards({ score, setScore }) {
+function Cards({ score, setScore, highScore, setHighScore }) {
+  const cards = Array.from({ length: 12 }, () => (
+    <IndivCard
+      onBadClick={onBadClick}
+      onGoodClick={onGoodClick}
+      setHighScore={checkHighScore}
+    />
+  ));
+
   function onGoodClick() {
     setScore(score + 1);
-    console.log(score);
+    checkHighScore();
+    if (score === 11) {
+      console.log(`score is: ${score}`);
+      alert("Game won - Well done!");
+      window.location.reload(false);
+    } else {
+      console.log(`score is: ${score}`);
+    }
   }
 
   function onBadClick() {
     setScore(0);
     alert("Oops, bad click, Game over!");
+    window.location.reload(false);
   }
-  const cards = Array.from({ length: 12 }, () => (
-    <IndivCard onBadClick={onBadClick} onGoodClick={onGoodClick} />
-  ));
+
+  function checkHighScore() {
+    if (score > highScore) {
+      setHighScore(score);
+      console.log(`high score is: ${score}`);
+    } else {
+      console.log(`high score is: ${score}`);
+    }
+  }
+
   console.log(cards);
 
   //cards need to keep track of if they've been clicked or not
