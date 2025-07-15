@@ -19,3 +19,5 @@
 - xxx if user makes it to 12 clicks then refresh and display winning message
 - record high score if higher than current high score
 - shuffle the cards after each click (but remember their clicked or not clicked status)
+- Only update the high score if the game is over
+- Save the high score even if the page refreshes (maybe call the cards api again without refreshing?)

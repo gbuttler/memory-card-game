@@ -11,8 +11,10 @@ function Cards({ score, setScore, highScore, setHighScore }) {
 
   function onGoodClick() {
     setScore(score + 1);
-    checkHighScore();
+
+    shuffleCards();
     if (score === 11) {
+      checkHighScore();
       console.log(`score is: ${score}`);
       alert("Game won - Well done!");
       window.location.reload(false);
@@ -22,6 +24,7 @@ function Cards({ score, setScore, highScore, setHighScore }) {
   }
 
   function onBadClick() {
+    checkHighScore();
     setScore(0);
     alert("Oops, bad click, Game over!");
     window.location.reload(false);
@@ -34,6 +37,23 @@ function Cards({ score, setScore, highScore, setHighScore }) {
     } else {
       console.log(`high score is: ${score}`);
     }
+  }
+
+  function shuffleCards() {
+    console.log("cards are being shuffled");
+    const shuffCards = [...cards];
+    let i = shuffCards.length;
+    let j;
+    let tempValue;
+
+    while (--i > 0) {
+      j = Math.floor(Math.random() * (i + 1));
+      tempValue = shuffCards[j];
+      shuffCards[j] = shuffCards[i];
+      shuffCards[i] = tempValue;
+      console.log("shuffling process");
+    }
+    return shuffCards;
   }
 
   console.log(cards);
