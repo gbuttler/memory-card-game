@@ -13,45 +13,21 @@ function Cards({ score, setScore, highScore, setHighScore }) {
 
   // Fetch card data once when component mounts
   useEffect(() => {
-    const fetchCardData = async () => {
-      try {
-        // Generate 12 unique random numbers for the cards
-        const randomNumbers = Array.from({ length: 12 }, () => getRandNo(7438));
-
-        // Fetch all card data at once
-        const promises = randomNumbers.map((randNo) =>
-          fetch(`https://api.disneyapi.dev/character/${randNo}`)
-            .then((response) => response.json())
-            .then((retrievedData) => ({
-              id: randNo,
-              data: retrievedData.data,
-              isClicked: false,
-            }))
-        );
-
-        const data = await Promise.all(promises);
-        setCardData(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching card data:", error);
-        setIsLoading(false);
-      }
-    };
-
     fetchCardData();
-  }, []); // Empty dependency array means this only runs once
+  }, []);
 
   function onGoodClick() {
-    setScore(score + 1);
-
+    const newScore = score + 1;
+    setScore(newScore);
     shuffleCards();
-    if (score === 11) {
-      checkHighScore();
-      console.log(`score is: ${score}`);
+    if (newScore === 12) {
+      checkHighScore(newScore);
+      console.log(`score is: ${newScore}`);
       alert("Game won - Well done!");
-      window.location.reload(false);
+      setScore(0);
+      resetGame();
     } else {
-      console.log(`score is: ${score}`);
+      console.log(`score is: ${newScore}`);
     }
   }
 
@@ -59,15 +35,48 @@ function Cards({ score, setScore, highScore, setHighScore }) {
     checkHighScore();
     setScore(0);
     alert("Oops, bad click, Game over!");
-    window.location.reload(false);
+    resetGame();
   }
 
-  function checkHighScore() {
-    if (score > highScore) {
-      setHighScore(score);
-      console.log(`high score is: ${score}`);
+  function resetGame() {
+    setCardData((prevCards) =>
+      prevCards.map((card) => ({ ...card, isClicked: false }))
+    );
+    fetchCardData();
+  }
+
+  const fetchCardData = async () => {
+    try {
+      setIsLoading(true);
+      // Generate 12 unique random numbers for the cards
+      const randomNumbers = Array.from({ length: 12 }, () => getRandNo(7438));
+
+      // Fetch all card data at once
+      const promises = randomNumbers.map((randNo) =>
+        fetch(`https://api.disneyapi.dev/character/${randNo}`)
+          .then((response) => response.json())
+          .then((retrievedData) => ({
+            id: randNo,
+            data: retrievedData.data,
+            isClicked: false,
+          }))
+      );
+
+      const data = await Promise.all(promises);
+      setCardData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching card data:", error);
+      setIsLoading(false);
+    }
+  };
+
+  function checkHighScore(newScore) {
+    if (newScore > highScore) {
+      setHighScore(newScore);
+      console.log(`high score is: ${newScore}`);
     } else {
-      console.log(`high score is: ${score}`);
+      console.log(`high score is: ${highScore}`);
     }
   }
 
@@ -94,8 +103,6 @@ function Cards({ score, setScore, highScore, setHighScore }) {
   if (isLoading) {
     return <div>Loading cards...</div>;
   }
-
-  //   console.log(cards);
 
   //   //cards need to keep track of if they've been clicked or not
   //   //cards need to change visual order when one is clicked (but data should not change)

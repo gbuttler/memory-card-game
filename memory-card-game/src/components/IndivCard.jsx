@@ -1,31 +1,11 @@
-import { useState } from "react";
-
-// //function to get a random number between 0 and 7438 (the max number of characters)
-// function getRandNo(max) {
-//   return Math.floor(Math.random() * max);
-// }
-
 function IndivCard({ cardData, onGoodClick, onBadClick }) {
-  // console.log("rendering invid card");
-  // const [charData, setCharData] = useState({});
-  const [isClicked, setIsClicked] = useState(false);
-
-  // const randNo = getRandNo(7438);
-
-  // useEffect(() => {
-  //   fetch(`https://api.disneyapi.dev/character/${randNo}`)
-  //     .then((response) => response.json())
-  //     .then((retrievedData) => setCharData(retrievedData))
-  //     .catch((error) => console.error(error));
-  // }, []);
-
   function cardClick() {
     console.log(`${cardData.id} clicked`);
-    setIsClicked(true);
 
-    if (isClicked === true) {
+    if (cardData.isClicked === true) {
       onBadClick();
     } else {
+      cardData.isClicked = true; // Mark the card as clicked
       onGoodClick();
     }
   }
