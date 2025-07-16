@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-//function to get a random number between 0 and 7438 (the max number of characters)
-function getRandNo(max) {
-  return Math.floor(Math.random() * max);
-}
+// //function to get a random number between 0 and 7438 (the max number of characters)
+// function getRandNo(max) {
+//   return Math.floor(Math.random() * max);
+// }
 
-function IndivCard({ onGoodClick, onBadClick }) {
+function IndivCard({ cardData, onGoodClick, onBadClick }) {
   // console.log("rendering invid card");
-  const [charData, setCharData] = useState({});
+  // const [charData, setCharData] = useState({});
   const [isClicked, setIsClicked] = useState(false);
 
-  const randNo = getRandNo(7438);
+  // const randNo = getRandNo(7438);
 
-  useEffect(() => {
-    fetch(`https://api.disneyapi.dev/character/${randNo}`)
-      .then((response) => response.json())
-      .then((retrievedData) => setCharData(retrievedData))
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`https://api.disneyapi.dev/character/${randNo}`)
+  //     .then((response) => response.json())
+  //     .then((retrievedData) => setCharData(retrievedData))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   function cardClick() {
-    console.log(`${randNo} clicked`);
+    console.log(`${cardData.id} clicked`);
     setIsClicked(true);
 
     if (isClicked === true) {
@@ -39,11 +39,11 @@ function IndivCard({ onGoodClick, onBadClick }) {
         <div className="flex flex-col justify-center w-30 h-40">
           <img
             className="max-w-30 max-h-40"
-            src={charData?.data?.imageUrl}
+            src={cardData?.data?.imageUrl}
           ></img>
         </div>
         <div className="flex w-40 justify-center">
-          <p className="text-xl text-white">{charData?.data?.name}</p>
+          <p className="text-xl text-white">{cardData?.data?.name}</p>
         </div>
       </div>
     </>
